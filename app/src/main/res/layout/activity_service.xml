@@ -37,8 +37,8 @@
         android:text="Bind Service"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.439"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintVertical_bias="0.111"
+        tools:layout_editor_absoluteX="4dp" />
 
     <Button
         android:id="@+id/button4"
@@ -48,8 +48,33 @@
         android:text="unbind Service"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.641"
         app:layout_constraintStart_toEndOf="@+id/button3"
         app:layout_constraintTop_toBottomOf="@+id/button2"
-        app:layout_constraintVertical_bias="0.447" />
+        app:layout_constraintVertical_bias="0.111" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="bindRemoteServiceClick"
+        android:text="绑定远程Service"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:layout_constraintVertical_bias="0.169"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autoText="false"
+        android:onClick="unbindRemoteServiceClick"
+        android:text="解绑远程Service"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.56"
+        app:layout_constraintStart_toEndOf="@+id/button5"
+        app:layout_constraintTop_toBottomOf="@+id/button4"
+        app:layout_constraintVertical_bias="0.169" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import static com.prsuit.androidlearnsample.Constants.TAG;
 
 /**
- * @Description:
+ * @Description: 普通Service
  * @Author: sh
  * @Date: 2020/7/30
  */

@@ -20,6 +20,9 @@
 
         <service android:name="com.prsuit.androidlearnsample.service.LocalService"/>
         <service android:name="com.prsuit.androidlearnsample.service.BindService"/>
+        <service
+            android:name="com.prsuit.androidlearnsample.service.RemoteService"
+            android:process=":remote" />
     </application>
 
 </manifest>

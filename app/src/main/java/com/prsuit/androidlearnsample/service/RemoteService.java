@@ -2,28 +2,39 @@ package com.prsuit.androidlearnsample.service;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.Binder;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.prsuit.androidlearnsample.aidl.IMyAIDLService;
+
 import static com.prsuit.androidlearnsample.Constants.TAG;
 
 /**
- * @Description: 使用Binder类通信的Service
+ * @Description: 远程Service
  * @Author: sh
- * @Date: 2020/7/30
+ * @Date: 2020/7/31
  */
-public class BindService extends Service {
-    //定义Binder对象
-    private MyBinder myBinder = new MyBinder();
+public class RemoteService extends Service {
+    //AIDL 服务端 Binder
+    private IMyAIDLService.Stub mBinder = new IMyAIDLService.Stub() {
+        @Override
+        public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
+        }
+
+        //交互方法
+        @Override
+        public int plus(int a, int b) throws RemoteException {
+            return a + b;
+        }
+    };
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        Log.e(TAG, "onBind: ");
-        return myBinder;
+        return mBinder;
     }
 
     @Override
@@ -42,13 +53,5 @@ public class BindService extends Service {
     public void onDestroy() {
         Log.e(TAG, "onDestroy: " );
         super.onDestroy();
-    }
-
-    //扩展 Binder 类
-    class MyBinder extends Binder {
-        //交互方法
-        public void startTask(){
-            Log.e(TAG, "startTask: " );
-        }
     }
 }
