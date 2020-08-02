@@ -3,12 +3,12 @@ package com.prsuit.androidlearnsample;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.prsuit.androidlearnsample.broadcastreceiver.BroadcastActivity;
 import com.prsuit.androidlearnsample.service.ServiceActivity;
 
 import static com.prsuit.androidlearnsample.Constants.TAG;
@@ -16,7 +16,8 @@ import static com.prsuit.androidlearnsample.Constants.TAG;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private String  subTag = "MainActivity";
     private TextView serviceTv;
-    
+    private TextView broadcastTv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +29,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initListener() {
         serviceTv.setOnClickListener(this);
+        broadcastTv.setOnClickListener(this);
     }
 
     private void initView() {
         serviceTv = findViewById(R.id.service_tv);
+        broadcastTv = findViewById(R.id.sendBroadcast_tv);
     }
 
 
@@ -82,6 +85,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.service_tv:
                 ServiceActivity.startAct(this);
+                break;
+            case R.id.sendBroadcast_tv:
+                BroadcastActivity.startAct(this);
                 break;
         }
     }

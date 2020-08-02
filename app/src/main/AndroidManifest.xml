@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".service.ServiceActivity"></activity>
+        <activity android:name=".broadcastreceiver.BroadcastActivity"></activity>
+        <activity android:name=".service.ServiceActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,11 +19,19 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.prsuit.androidlearnsample.service.LocalService"/>
-        <service android:name="com.prsuit.androidlearnsample.service.BindService"/>
+        <!-- 静态注册广播接收器 -->
+<!--        <receiver android:name=".broadcastreceiver.MyBroadcastReceiver">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="com.prsuit.sample.normal_action_name" />-->
+<!--                <action android:name="com.prsuit.sample.ordered_action_name" />-->
+<!--                <action android:name="com.prsuit.sample.local_action_name" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
+        <service android:name=".service.BindService" />
         <service
-            android:name="com.prsuit.androidlearnsample.service.RemoteService"
+            android:name=".service.RemoteService"
             android:process=":remote" />
+        <service android:name=".service.LocalService" />
     </application>
 
 </manifest>
