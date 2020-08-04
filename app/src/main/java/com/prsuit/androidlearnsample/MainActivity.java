@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.prsuit.androidlearnsample.broadcastreceiver.BroadcastActivity;
+import com.prsuit.androidlearnsample.contentprovider.ContentProviderActivity;
 import com.prsuit.androidlearnsample.service.ServiceActivity;
 
 import static com.prsuit.androidlearnsample.Constants.TAG;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String  subTag = "MainActivity";
     private TextView serviceTv;
     private TextView broadcastTv;
+    private TextView contentProviderTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +32,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initListener() {
         serviceTv.setOnClickListener(this);
         broadcastTv.setOnClickListener(this);
+        contentProviderTv.setOnClickListener(this);
     }
 
     private void initView() {
         serviceTv = findViewById(R.id.service_tv);
         broadcastTv = findViewById(R.id.sendBroadcast_tv);
+        contentProviderTv = findViewById(R.id.content_provider_tv);
     }
 
 
@@ -88,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.sendBroadcast_tv:
                 BroadcastActivity.startAct(this);
+                break;
+            case R.id.content_provider_tv:
+                ContentProviderActivity.startAct(this);
                 break;
         }
     }

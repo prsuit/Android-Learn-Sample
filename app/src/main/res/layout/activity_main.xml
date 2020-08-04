@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Activity 相关"
+        android:textSize="24sp"
+        android:layout_margin="20dp" />
 
     <TextView
         android:id="@+id/service_tv"
@@ -12,26 +22,34 @@
         android:layout_height="wrap_content"
         android:text="Service 相关"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+        android:layout_margin="20dp" />
+
+
+    <TextView
+        android:id="@+id/sendBroadcast_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="140dp"
+        android:text="BroadcastReceiver 相关"
+        android:textSize="24sp"
+        android:layout_margin="20dp"/>
+
+    <TextView
+        android:id="@+id/content_provider_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ContentProvider 相关"
+        android:textSize="24sp"
+        android:layout_margin="20dp"/>
 
     <TextView
         android:id="@+id/rv_tv"
         android:layout_width="193dp"
         android:layout_height="27dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="44dp"
         android:text="RecycleView 相关"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sendBroadcast_tv"
-        app:layout_constraintVertical_bias="0.001"
-        tools:ignore="MissingConstraints" />
+        android:layout_margin="20dp" />
 
     <TextView
         android:id="@+id/lazy_load_tv"
@@ -41,22 +59,9 @@
         android:layout_marginBottom="348dp"
         android:text="懒加载"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_tv"
-        app:layout_constraintVertical_bias="0.236"
-        tools:ignore="MissingConstraints" />
+        android:layout_margin="20dp"/>
 
-    <TextView
-        android:id="@+id/sendBroadcast_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="140dp"
-        android:text="BroadcastReceiver 相关"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/service_tv"
-        app:layout_constraintVertical_bias="0.058" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>
