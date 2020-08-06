@@ -52,14 +52,14 @@
         android:layout_margin="20dp" />
 
     <TextView
-        android:id="@+id/lazy_load_tv"
+        android:id="@+id/lazy_fragment_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:layout_marginStart="72dp"
         android:layout_marginBottom="348dp"
-        android:text="懒加载"
-        android:textSize="24sp"
-        android:layout_margin="20dp"/>
+        android:text="Fragment 懒加载"
+        android:textSize="24sp" />
 
 
 

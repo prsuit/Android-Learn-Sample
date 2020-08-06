@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.prsuit.androidlearnsample.broadcastreceiver.BroadcastActivity;
 import com.prsuit.androidlearnsample.contentprovider.ContentProviderActivity;
+import com.prsuit.androidlearnsample.fragment.MyFragmentActivity;
 import com.prsuit.androidlearnsample.service.ServiceActivity;
 
 import static com.prsuit.androidlearnsample.Constants.TAG;
@@ -19,11 +20,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView serviceTv;
     private TextView broadcastTv;
     private TextView contentProviderTv;
+    private TextView lazyFragmentTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         Log.e(TAG, "onCreate: " + subTag);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
         initListener();
@@ -33,55 +35,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         serviceTv.setOnClickListener(this);
         broadcastTv.setOnClickListener(this);
         contentProviderTv.setOnClickListener(this);
+        lazyFragmentTv.setOnClickListener(this);
     }
 
     private void initView() {
         serviceTv = findViewById(R.id.service_tv);
         broadcastTv = findViewById(R.id.sendBroadcast_tv);
         contentProviderTv = findViewById(R.id.content_provider_tv);
+        lazyFragmentTv = findViewById(R.id.lazy_fragment_tv);
     }
 
 
     @Override
     protected void onStart() {
-        super.onStart();
         Log.e(TAG, "onStart: " + subTag);
+        super.onStart();
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
         Log.e(TAG, "onRestoreInstanceState: " + subTag);
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
     protected void onResume() {
-        super.onResume();
         Log.e(TAG, "onResume: " + subTag);
+        super.onResume();
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
         Log.e(TAG, "onPause: " + subTag);
+        super.onPause();
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
         Log.e(TAG, "onSaveInstanceState: " + subTag);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
     protected void onStop() {
-        super.onStop();
         Log.e(TAG, "onStop: " + subTag);
+        super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         Log.e(TAG, "onDestroy: " + subTag);
+        super.onDestroy();
     }
 
     @Override
@@ -95,6 +99,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.content_provider_tv:
                 ContentProviderActivity.startAct(this);
+                break;
+            case R.id.lazy_fragment_tv:
+                MyFragmentActivity.startAct(this);
                 break;
         }
     }

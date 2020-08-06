@@ -2,14 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.prsuit.androidlearnsample">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="com.prsuit."/>
-    <!-- MyProvider 访问权限声明 -->
-    <permission android:name="com.prsuit.myprovider.READ"
-        android:protectionLevel="normal" />
-    <permission android:name="com.prsuit.myprovider.WRITE"
-        android:protectionLevel="normal" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".contentprovider.ContentProviderActivity"></activity>
+        <activity android:name=".fragment.MyFragmentActivity"></activity>
+        <activity android:name=".contentprovider.ContentProviderActivity" />
         <activity android:name=".broadcastreceiver.BroadcastActivity" />
         <activity android:name=".service.ServiceActivity" />
         <activity android:name=".MainActivity">
@@ -26,8 +19,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- 静态注册广播接收器 -->
+        </activity> <!-- 静态注册广播接收器 -->
         <!-- <receiver android:name=".broadcastreceiver.MyBroadcastReceiver"> -->
         <!-- <intent-filter> -->
         <!-- <action android:name="com.prsuit.sample.normal_action_name" /> -->
@@ -35,21 +27,27 @@
         <!-- <action android:name="com.prsuit.sample.local_action_name" /> -->
         <!-- </intent-filter> -->
         <!-- </receiver> -->
-        <service android:name=".service.BindService" />
-        <service
-            android:name=".service.RemoteService"
-            android:process=":remote" />
-        <service android:name=".service.LocalService" />
-
-        <!--注册创建的ContentProvider类-->
         <provider
             android:name=".contentprovider.MyContentProvider"
             android:authorities="com.prsuit.myprovider"
+            android:exported="true"
             android:process=":provider"
             android:readPermission="com.prsuit.myprovider.READ"
-            android:writePermission="com.prsuit.myprovider.WRITE"
-            android:exported="true"
-            />
+            android:writePermission="com.prsuit.myprovider.WRITE" />
+        <service
+            android:name=".service.RemoteService"
+            android:process=":remote" />
+        <service android:name=".service.LocalService" /> <!-- 注册创建的ContentProvider类 -->
+        <service android:name=".service.BindService" />
     </application>
+    <permission
+        android:name="com.prsuit.myprovider.WRITE"
+        android:protectionLevel="normal" /> <!-- MyProvider 访问权限声明 -->
+    <permission
+        android:name="com.prsuit.myprovider.READ"
+        android:protectionLevel="normal" />
+    <uses-permission android:name="com.prsuit." />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
