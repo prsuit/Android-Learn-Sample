@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.prsuit.androidlearnsample.broadcastreceiver.BroadcastActivity;
 import com.prsuit.androidlearnsample.contentprovider.ContentProviderActivity;
 import com.prsuit.androidlearnsample.fragment.MyFragmentActivity;
+import com.prsuit.androidlearnsample.fragment.ViewPagerActivity;
 import com.prsuit.androidlearnsample.service.ServiceActivity;
 
 import static com.prsuit.androidlearnsample.Constants.TAG;
@@ -101,7 +102,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ContentProviderActivity.startAct(this);
                 break;
             case R.id.lazy_fragment_tv:
-                MyFragmentActivity.startAct(this);
+//                MyFragmentActivity.startAct(this);
+                ViewPagerActivity.startAct(this);
                 break;
         }
     }

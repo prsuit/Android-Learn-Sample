@@ -1,6 +1,7 @@
 package com.prsuit.androidlearnsample.fragment;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -32,7 +33,7 @@ public class MyFragmentActivity extends AppCompatActivity implements MyFragment.
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, LazyFragment.newInstance("Fragment1"), "f1")
+                    .add(R.id.container, MyFragment.newInstance("Fragment1"), "f1")
                     // 调用replace/add时不加addToBackStack(),会调用了onDestroy()和onDetach(),加了只调到了onDestroyView()
                     // 因此在Fragment事务中加不加addToBackStack()会影响Fragment的生命周期。
                     .addToBackStack("") //是可选的，FragmentManager拥有回退栈（BackStack），类似于Activity的任务栈，
@@ -40,7 +41,7 @@ public class MyFragmentActivity extends AppCompatActivity implements MyFragment.
                     .commit();
         } else {
             //处理Fragment重叠问题第一种方式，这是由于Fragment被系统杀掉，并重新初始化时再次将fragment加入activity，
-            LazyFragment fragment1 = (LazyFragment) getSupportFragmentManager().findFragmentByTag("f1");
+            MyFragment fragment1 = (MyFragment) getSupportFragmentManager().findFragmentByTag("f1");
         }
         Log.e(TAG, "onCreate: end--" + subTag);
 
@@ -48,33 +49,33 @@ public class MyFragmentActivity extends AppCompatActivity implements MyFragment.
 //        Fragment tempFragment = getSupportFragmentManager().findFragmentByTag("f1");
 //        if (tempFragment == null){
 //            getSupportFragmentManager().beginTransaction()
-//                    .add(R.id.container,LazyFragment.newInstance("Fragment1"),"f1")
+//                    .add(R.id.container,MyFragment.newInstance("Fragment1"),"f1")
 //                    .commit();
 //        } else {
-//            LazyFragment fragment1 = (LazyFragment) tempFragment;
+//            MyFragment fragment1 = (MyFragment) tempFragment;
 //            getSupportFragmentManager().beginTransaction().show(fragment1);
 //        }
     }
 
     public void fragment1Click(View view){
         Fragment tempFragment = getSupportFragmentManager().findFragmentByTag("f1");
-        if (tempFragment == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.container, LazyFragment.newInstance("Fragment1"), "f1")
+        if (tempFragment == null){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container,MyFragment.newInstance("Fragment1"),"f1")
                     .addToBackStack("")
                     .commit();
         } else {
-            LazyFragment lazyFragment = (LazyFragment) tempFragment;
-            getSupportFragmentManager().beginTransaction().show(lazyFragment);
+            MyFragment myFragment = (MyFragment) tempFragment;
+            getSupportFragmentManager().beginTransaction().show(myFragment);
         }
     }
 
     public void fragment2Click(View view){
         Fragment tempFragment = getSupportFragmentManager().findFragmentByTag("f2");
-        if (tempFragment == null){
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container,MyFragment.newInstance("Fragment2"),"f2")
+        if (tempFragment == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container, MyFragment.newInstance("Fragment2"), "f2")
                     .addToBackStack("")
                     .commit();
         } else {
@@ -95,8 +96,8 @@ public class MyFragmentActivity extends AppCompatActivity implements MyFragment.
         Log.e(TAG, "onAttachFragment: "+subTag);
         super.onAttachFragment(fragment);
         //处理Fragment重叠问题第三种方式，
-        if (fragment instanceof LazyFragment){
-            LazyFragment fragment1 = (LazyFragment) fragment;
+        if (fragment instanceof MyFragment){
+            MyFragment fragment1 = (MyFragment) fragment;
         }
     }
 
@@ -137,5 +138,12 @@ public class MyFragmentActivity extends AppCompatActivity implements MyFragment.
     @Override
     public void sendData(String str) {
         Toast.makeText(this,"收到Fragment的数据-->"+str,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //根据requestCode判断是否分发给fragment，如果是来自fragment，真正的requestCode = (requestCode & 0xffff)
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.e(TAG, "onActivityResult: "+subTag +"--req->"+ requestCode +"--res-->"+resultCode );
     }
 }

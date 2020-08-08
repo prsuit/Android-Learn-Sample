@@ -1,15 +1,18 @@
 package com.prsuit.androidlearnsample.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.prsuit.androidlearnsample.R;
@@ -21,11 +24,12 @@ import static com.prsuit.androidlearnsample.Constants.TAG;
  * @Author: sh
  * @Date: 2020/8/5
  */
-public class MyFragment extends Fragment {
+public class MyFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_PARAM = "arg_param";
     private String subTag = "MyFragment";
     private String argParam;
     private TextView nameTv;
+    private Button fragStartBtn, getActStartBtn, showDialogBtn;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -54,7 +58,11 @@ public class MyFragment extends Fragment {
         Log.e(TAG, "onCreateView: " +subTag);
         View viewRoot = inflater.inflate(R.layout.fragment_layout,container,false);
         nameTv = viewRoot.findViewById(R.id.name_tv);
+        fragStartBtn = viewRoot.findViewById(R.id.fragment_start_btn);
+        getActStartBtn = viewRoot.findViewById(R.id.getActivity_start_btn);
+        showDialogBtn = viewRoot.findViewById(R.id.show_dialog_btn);
         nameTv.setText(argParam);
+        initListener();
         return viewRoot;
     }
 
@@ -126,5 +134,49 @@ public class MyFragment extends Fragment {
     OnFragmentListener onFragmentListener;
     public void setOnFragmentListener(OnFragmentListener onFragmentListener){
         this.onFragmentListener = onFragmentListener;
+    }
+
+    public void initListener() {
+        fragStartBtn.setOnClickListener(this);
+        getActStartBtn.setOnClickListener(this);
+        showDialogBtn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.fragment_start_btn:
+                fragmentStartActivityForResult();
+                break;
+            case R.id.getActivity_start_btn:
+                getActivityStartActivityForResult();
+                break;
+            case R.id.show_dialog_btn:
+                showDialogFragment();
+                break;
+        }
+    }
+
+    //fragment onActivityResult 收得到回调
+    public void fragmentStartActivityForResult(){
+        Intent intent = new Intent(getActivity(), TestResultActivity.class);
+        startActivityForResult(intent,0x01);//mHost.onStartActivityFromFragment()
+    }
+
+    //fragment onActivityResult 收不到回调
+    public void getActivityStartActivityForResult(){
+        Intent intent = new Intent(getActivity(), TestResultActivity.class);
+        getActivity().startActivityForResult(intent,0x02);//通过activity启动
+    }
+
+    public void showDialogFragment(){
+        MyDialogFragment dialogFragment = MyDialogFragment.newInstance();
+        dialogFragment.show(getActivity().getSupportFragmentManager(),"dialog");
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.e(TAG, "onActivityResult: " + subTag +"--req->"+requestCode+"--res-->"+resultCode );
     }
 }

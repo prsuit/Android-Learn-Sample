@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.prsuit.androidlearnsample">
-
+    <!-- MyProvider 访问权限声明 -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".fragment.MyFragmentActivity"></activity>
+        <activity android:name=".fragment.ViewPagerActivity"></activity>
+        <activity android:name=".fragment.TestResultActivity" />
+        <activity android:name=".fragment.MyFragmentActivity" />
         <activity android:name=".contentprovider.ContentProviderActivity" />
         <activity android:name=".broadcastreceiver.BroadcastActivity" />
         <activity android:name=".service.ServiceActivity" />
@@ -34,6 +36,7 @@
             android:process=":provider"
             android:readPermission="com.prsuit.myprovider.READ"
             android:writePermission="com.prsuit.myprovider.WRITE" />
+
         <service
             android:name=".service.RemoteService"
             android:process=":remote" />
@@ -42,7 +45,8 @@
     </application>
     <permission
         android:name="com.prsuit.myprovider.WRITE"
-        android:protectionLevel="normal" /> <!-- MyProvider 访问权限声明 -->
+        android:protectionLevel="normal" />
+
     <permission
         android:name="com.prsuit.myprovider.READ"
         android:protectionLevel="normal" />
