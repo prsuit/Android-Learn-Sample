@@ -58,7 +58,7 @@
         android:layout_margin="20dp"
         android:layout_marginStart="72dp"
         android:layout_marginBottom="348dp"
-        android:text="Fragment 懒加载"
+        android:text="Fragment 相关"
         android:textSize="24sp" />
 
 

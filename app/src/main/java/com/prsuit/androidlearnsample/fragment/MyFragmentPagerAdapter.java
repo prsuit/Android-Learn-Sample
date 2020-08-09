@@ -21,6 +21,11 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
         this.fragmentList = fragmentList;
     }
 
+    public MyFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragmentList,int behavior){
+        super(fm,behavior);
+        this.fragmentList = fragmentList;
+    }
+
     public MyFragmentPagerAdapter(@NonNull FragmentManager fm) {
         super(fm);
     }

@@ -36,7 +36,7 @@ public class MyFragmentActivity extends AppCompatActivity implements MyFragment.
                     .add(R.id.container, MyFragment.newInstance("Fragment1"), "f1")
                     // 调用replace/add时不加addToBackStack(),会调用了onDestroy()和onDetach(),加了只调到了onDestroyView()
                     // 因此在Fragment事务中加不加addToBackStack()会影响Fragment的生命周期。
-                    .addToBackStack("") //是可选的，FragmentManager拥有回退栈（BackStack），类似于Activity的任务栈，
+//                    .addToBackStack("") //是可选的，FragmentManager拥有回退栈（BackStack），类似于Activity的任务栈，
                     // 如果添加了该语句，就把该事务加入回退栈，当用户点击返回按钮，会回退该事务。
                     .commit();
         } else {
@@ -62,7 +62,7 @@ public class MyFragmentActivity extends AppCompatActivity implements MyFragment.
         if (tempFragment == null){
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container,MyFragment.newInstance("Fragment1"),"f1")
-                    .addToBackStack("")
+//                    .addToBackStack("")
                     .commit();
         } else {
             MyFragment myFragment = (MyFragment) tempFragment;
@@ -76,7 +76,7 @@ public class MyFragmentActivity extends AppCompatActivity implements MyFragment.
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.container, MyFragment.newInstance("Fragment2"), "f2")
-                    .addToBackStack("")
+//                    .addToBackStack("")
                     .commit();
         } else {
             MyFragment myFragment = (MyFragment) tempFragment;

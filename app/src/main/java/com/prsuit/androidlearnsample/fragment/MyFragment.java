@@ -29,7 +29,8 @@ public class MyFragment extends Fragment implements View.OnClickListener {
     private String subTag = "MyFragment";
     private String argParam;
     private TextView nameTv;
-    private Button fragStartBtn, getActStartBtn, showDialogBtn;
+    private View viewRoot;
+    private Button fragStartBtn, getActStartBtn, showDialogBtn,showLazyBtn;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -56,14 +57,19 @@ public class MyFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.e(TAG, "onCreateView: " +subTag);
-        View viewRoot = inflater.inflate(R.layout.fragment_layout,container,false);
+         viewRoot = inflater.inflate(R.layout.fragment_layout,container,false);
+        initView();
+        initListener();
+        return viewRoot;
+    }
+
+    private void initView() {
         nameTv = viewRoot.findViewById(R.id.name_tv);
         fragStartBtn = viewRoot.findViewById(R.id.fragment_start_btn);
         getActStartBtn = viewRoot.findViewById(R.id.getActivity_start_btn);
         showDialogBtn = viewRoot.findViewById(R.id.show_dialog_btn);
+        showLazyBtn = viewRoot.findViewById(R.id.show_lazy_btn);
         nameTv.setText(argParam);
-        initListener();
-        return viewRoot;
     }
 
     @Override
@@ -140,6 +146,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         fragStartBtn.setOnClickListener(this);
         getActStartBtn.setOnClickListener(this);
         showDialogBtn.setOnClickListener(this);
+        showLazyBtn.setOnClickListener(this);
     }
 
     @Override
@@ -153,6 +160,9 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.show_dialog_btn:
                 showDialogFragment();
+                break;
+            case R.id.show_lazy_btn:
+                showLazyFragment();
                 break;
         }
     }
@@ -172,6 +182,10 @@ public class MyFragment extends Fragment implements View.OnClickListener {
     public void showDialogFragment(){
         MyDialogFragment dialogFragment = MyDialogFragment.newInstance();
         dialogFragment.show(getActivity().getSupportFragmentManager(),"dialog");
+    }
+
+    public void showLazyFragment(){
+        ViewPagerActivity.startAct(getActivity());
     }
 
     @Override

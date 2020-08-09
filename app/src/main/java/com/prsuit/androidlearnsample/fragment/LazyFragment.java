@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import static com.prsuit.androidlearnsample.Constants.TAG;
 
 /**
- * @Description: 懒加载基类
+ * @Description: androidx之前懒加载基类
  * @Author: sh
  * @Date: 2020/8/5
  */
@@ -46,9 +46,6 @@ public abstract class LazyFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.e(TAG, "onCreateView: " +subTag);
-//        View viewRoot = inflater.inflate(R.layout.fragment_layout,container,false);
-//        nameTv = viewRoot.findViewById(R.id.name_tv);
-//        nameTv.setText(argParam);
         if (null == rootView){
             rootView = inflater.inflate(getLayoutRes(),container,false);
         }
