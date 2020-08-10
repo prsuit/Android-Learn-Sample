@@ -19,6 +19,8 @@ import static com.prsuit.androidlearnsample.Constants.TAG;
 public class MyFragmentActivity extends AppCompatActivity implements MyFragment.OnFragmentListener {
 
     private String subTag = "MyFragmentActivity";
+    private Fragment mCurrentFragment;
+    private Fragment fragment0,fragment1,fragment2;
 
     public static void startAct(Context context) {
         context.startActivity(new Intent(context, MyFragmentActivity.class));
@@ -31,9 +33,10 @@ public class MyFragmentActivity extends AppCompatActivity implements MyFragment.
         setContentView(R.layout.activity_my_fragment);
 
         if (savedInstanceState == null) {
+            fragment0 = MyFragment.newInstance("Fragment0");
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, MyFragment.newInstance("Fragment1"), "f1")
+                    .add(R.id.container, fragment0, "f0")
                     // 调用replace/add时不加addToBackStack(),会调用了onDestroy()和onDetach(),加了只调到了onDestroyView()
                     // 因此在Fragment事务中加不加addToBackStack()会影响Fragment的生命周期。
 //                    .addToBackStack("") //是可选的，FragmentManager拥有回退栈（BackStack），类似于Activity的任务栈，
@@ -41,47 +44,56 @@ public class MyFragmentActivity extends AppCompatActivity implements MyFragment.
                     .commit();
         } else {
             //处理Fragment重叠问题第一种方式，这是由于Fragment被系统杀掉，并重新初始化时再次将fragment加入activity，
-            MyFragment fragment1 = (MyFragment) getSupportFragmentManager().findFragmentByTag("f1");
+            fragment0 = getSupportFragmentManager().findFragmentByTag("f0");
+            if (fragment0 != null){
+                getSupportFragmentManager().beginTransaction().show(fragment0).commit();
+            }
         }
+        mCurrentFragment = fragment0;
         Log.e(TAG, "onCreate: end--" + subTag);
 
         //处理Fragment重叠问题第二种方式 在创建 Fragment 前添加判断，判断是否已经存在：
-//        Fragment tempFragment = getSupportFragmentManager().findFragmentByTag("f1");
+//        Fragment tempFragment = getSupportFragmentManager().findFragmentByTag("f0");
 //        if (tempFragment == null){
 //            getSupportFragmentManager().beginTransaction()
-//                    .add(R.id.container,MyFragment.newInstance("Fragment1"),"f1")
+//                    .add(R.id.container,MyFragment.newInstance("Fragment0"),"f0")
 //                    .commit();
 //        } else {
-//            MyFragment fragment1 = (MyFragment) tempFragment;
-//            getSupportFragmentManager().beginTransaction().show(fragment1);
+//            MyFragment fragment0 = (MyFragment) tempFragment;
+//            getSupportFragmentManager().beginTransaction().show(fragment0).commit();
 //        }
     }
 
-    public void fragment1Click(View view){
-        Fragment tempFragment = getSupportFragmentManager().findFragmentByTag("f1");
-        if (tempFragment == null){
+    //add()不会销毁当前fragment，创建新的
+    public void addFragment1Click(View view){
+        fragment1 = getSupportFragmentManager().findFragmentByTag("f1");
+        if (fragment1 == null){
+            fragment1 = MyFragment.newInstance("Fragment1");
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container,MyFragment.newInstance("Fragment1"),"f1")
+                    .add(R.id.container,fragment1,"f1")
+                    .hide(mCurrentFragment)
 //                    .addToBackStack("")
                     .commit();
         } else {
-            MyFragment myFragment = (MyFragment) tempFragment;
-            getSupportFragmentManager().beginTransaction().show(myFragment);
+            getSupportFragmentManager().beginTransaction().hide(mCurrentFragment).show(fragment1).commit();
         }
+        mCurrentFragment = fragment1;
     }
 
-    public void fragment2Click(View view){
-        Fragment tempFragment = getSupportFragmentManager().findFragmentByTag("f2");
-        if (tempFragment == null) {
+    //replace()销毁当前fragment，创建新的
+    public void replaceFragment2Click(View view){
+        fragment2 = getSupportFragmentManager().findFragmentByTag("f2");
+        if (fragment2 == null) {
+            fragment2 = MyFragment.newInstance("Fragment2");
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.container, MyFragment.newInstance("Fragment2"), "f2")
+                    .replace(R.id.container, fragment2, "f2")
 //                    .addToBackStack("")
                     .commit();
         } else {
-            MyFragment myFragment = (MyFragment) tempFragment;
-            getSupportFragmentManager().beginTransaction().show(myFragment);
+            getSupportFragmentManager().beginTransaction().hide(mCurrentFragment).show(fragment2).commit();
         }
+        mCurrentFragment = fragment2;
     }
 
     @Override

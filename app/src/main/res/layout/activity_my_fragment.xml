@@ -21,15 +21,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAllCaps="false"
-            android:text="replace fragment1"
-            android:onClick="fragment1Click"
+            android:text="add fragment1"
+            android:onClick="addFragment1Click"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAllCaps="false"
             android:text="replace fragment2"
-            android:onClick="fragment2Click"
+            android:onClick="replaceFragment2Click"
             />
     </LinearLayout>
 
