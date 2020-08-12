@@ -108,6 +108,12 @@ public class ServiceActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onRestart() {
+        Log.e(TAG, "onRestart: " + subTag);
+        super.onRestart();
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         Log.e(TAG, "onStart: " + subTag);

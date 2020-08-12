@@ -97,6 +97,12 @@ public class MyFragmentActivity extends AppCompatActivity implements MyFragment.
     }
 
     @Override
+    protected void onRestart() {
+        Log.e(TAG, "onRestart: " + subTag);
+        super.onRestart();
+    }
+
+    @Override
     protected void onStart() {
         Log.e(TAG, "onStart: begin--" + subTag);
         super.onStart();

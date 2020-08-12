@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.prsuit.androidlearnsample.broadcastreceiver.BroadcastActivity;
 import com.prsuit.androidlearnsample.contentprovider.ContentProviderActivity;
 import com.prsuit.androidlearnsample.fragment.MyFragmentActivity;
+import com.prsuit.androidlearnsample.handler.HandlerActivity;
 import com.prsuit.androidlearnsample.service.ServiceActivity;
 
 import static com.prsuit.androidlearnsample.Constants.TAG;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView broadcastTv;
     private TextView contentProviderTv;
     private TextView lazyFragmentTv;
+    private TextView handlerTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         broadcastTv.setOnClickListener(this);
         contentProviderTv.setOnClickListener(this);
         lazyFragmentTv.setOnClickListener(this);
+        handlerTv.setOnClickListener(this);
     }
 
     private void initView() {
@@ -43,8 +46,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         broadcastTv = findViewById(R.id.sendBroadcast_tv);
         contentProviderTv = findViewById(R.id.content_provider_tv);
         lazyFragmentTv = findViewById(R.id.lazy_fragment_tv);
+        handlerTv = findViewById(R.id.handler_tv);
     }
 
+    @Override
+    protected void onRestart() {
+        Log.e(TAG, "onRestart: " + subTag);
+        super.onRestart();
+    }
 
     @Override
     protected void onStart() {
@@ -102,7 +111,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.lazy_fragment_tv:
                 MyFragmentActivity.startAct(this);
-
+                break;
+            case R.id.handler_tv:
+                HandlerActivity.startAct(this);
                 break;
         }
     }
