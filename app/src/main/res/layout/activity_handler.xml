@@ -35,4 +35,13 @@
         android:textAllCaps="false"
         android:layout_margin="20dp"
         />
+    <Button
+        android:id="@+id/button17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="subThreadDownloadImageClick"
+        android:text="subThreadDownloadImage"
+        android:textAllCaps="false"
+        android:layout_margin="20dp"
+        />
 </LinearLayout>
