@@ -43,6 +43,7 @@
             android:process=":remote" />
         <service android:name=".service.LocalService" /> <!-- 注册创建的ContentProvider类 -->
         <service android:name=".service.BindService" />
+        <service android:name=".service.MyIntentService" />
     </application>
     <permission
         android:name="com.prsuit.myprovider.READ"

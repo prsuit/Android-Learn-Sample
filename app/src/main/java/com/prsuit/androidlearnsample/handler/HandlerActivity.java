@@ -3,6 +3,7 @@ package com.prsuit.androidlearnsample.handler;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -90,6 +91,7 @@ public class HandlerActivity extends AppCompatActivity {
             }
         };
 
+        //使用Handler.Callback处理消息
         subHandlerWithCallback = new Handler(handlerThread.getLooper(), new Handler.Callback() {
             @Override
             public boolean handleMessage(@NonNull Message msg) {
@@ -105,7 +107,7 @@ public class HandlerActivity extends AppCompatActivity {
                     Log.e(TAG, "handleMessage: --下载完成通知主线程更新UI，发送线程：-->"+Thread.currentThread().getName());
                     mainHandler.sendMessage(message);
                 }
-                return false;
+                return true;
             }
         });
     }

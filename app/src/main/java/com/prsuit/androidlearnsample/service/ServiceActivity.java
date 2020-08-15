@@ -3,6 +3,7 @@ package com.prsuit.androidlearnsample.service;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.IntentService;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -105,6 +106,13 @@ public class ServiceActivity extends AppCompatActivity {
         if (null != remoteConn){
             unbindService(remoteConn);
         }
+    }
+
+    public void startIntentServiceClick(View view){
+        Intent intent = new Intent(this,MyIntentService.class);
+//        Intent intent2 = new Intent(this,MyIntentService.class);
+        startService(intent);
+//        startService(intent2);
     }
 
     @Override
