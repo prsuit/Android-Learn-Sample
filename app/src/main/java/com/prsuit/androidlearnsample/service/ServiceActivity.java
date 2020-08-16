@@ -33,6 +33,7 @@ public class ServiceActivity extends AppCompatActivity {
     private ServiceConnection remoteConn;
     //aidl
     private IMyAIDLService myAIDLService;
+    Intent intentService;
 
     public static void startAct(Context context) {
         context.startActivity(new Intent(context,ServiceActivity.class));
@@ -46,6 +47,7 @@ public class ServiceActivity extends AppCompatActivity {
         startIntent = new Intent(this, LocalService.class);
         bindIntent = new Intent(this, BindService.class);
         remoteIntent = new Intent(this, RemoteService.class);
+        intentService = new Intent(this,MyIntentService.class);
         connection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
@@ -109,10 +111,9 @@ public class ServiceActivity extends AppCompatActivity {
     }
 
     public void startIntentServiceClick(View view){
-        Intent intent = new Intent(this,MyIntentService.class);
-//        Intent intent2 = new Intent(this,MyIntentService.class);
-        startService(intent);
-//        startService(intent2);
+        startService(intentService);
+        Intent intent2 = new Intent(this,MyIntentService.class);
+        startService(intent2);//多次启动，顺序执行，全部执行完自动结束
     }
 
     @Override
