@@ -3,6 +3,8 @@ package com.prsuit.androidlearnsample;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 /**
  * @Description:
  * @Author: sh
@@ -66,5 +68,11 @@ public class Book implements Parcelable {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Book{"+"name=" + name + ", price=" + price+'}';
     }
 }

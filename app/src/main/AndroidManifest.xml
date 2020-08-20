@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".handler.HandlerActivity"></activity>
+        <activity android:name=".service.AIDLActivity"></activity>
+        <activity android:name=".handler.HandlerActivity" />
         <activity android:name=".fragment.ViewPagerActivity" />
         <activity android:name=".fragment.TestResultActivity" />
         <activity android:name=".fragment.MyFragmentActivity" />
@@ -44,23 +45,26 @@
         <service android:name=".service.LocalService" /> <!-- 注册创建的ContentProvider类 -->
         <service android:name=".service.BindService" />
         <service android:name=".service.MyIntentService" />
-        <service android:name=".service.AIDLService"
-            android:process=":remote" >
-           <!-- 提供隐式调用-->
+        <service
+            android:name=".service.AIDLService"
+            android:exported="true"
+            android:process=":remote">
+
+            <!-- 提供隐式调用 -->
             <intent-filter>
-                <action android:name="com.prsuit.aidl.bookmanager"/>
+                <action android:name="com.prsuit.aidl.bookmanager" />
             </intent-filter>
         </service>
     </application>
     <permission
-        android:name="com.prsuit.myprovider.READ"
+        android:name="com.prsuit.myprovider.WRITE"
         android:protectionLevel="normal" />
 
     <permission
-        android:name="com.prsuit.myprovider.WRITE"
+        android:name="com.prsuit.myprovider.READ"
         android:protectionLevel="normal" />
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="com.prsuit." />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

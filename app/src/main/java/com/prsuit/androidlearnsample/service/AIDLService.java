@@ -22,7 +22,7 @@ import java.util.List;
 public class AIDLService extends Service {
 
     private final String TAG = "AIDLService";
-    private List<Book>mBooks = new ArrayList<>();
+    private List<Book> mBooks = new ArrayList<>();
 
     //由AIDL文件生成的BookManager
     private IBookManager.Stub mBookManager = new IBookManager.Stub() {
@@ -37,7 +37,9 @@ public class AIDLService extends Service {
 
         @Override
         public Book addBookIn(Book book) throws RemoteException {
+            Log.e(TAG, "addBookIn: 接收到的对象-->"+book.toString() );
             if (book == null){
+                Log.e(TAG, "addBookIn: book is null in In");
                 book = new Book();
             }
             //尝试修改book的参数，主要是为了观察其到客户端的反馈
@@ -45,23 +47,46 @@ public class AIDLService extends Service {
             if (!mBooks.contains(book)){
                 mBooks.add(book);
             }
-            Log.e(TAG, "addBookIn: "+mBooks.toString() );
+            Log.e(TAG, "addBookIn: now the list is "+mBooks.toString() );
             return book;
         }
 
         @Override
-        public Book addBookOut(Book msg) throws RemoteException {
-            return null;
+        public Book addBookOut(Book book) throws RemoteException {
+            Log.e(TAG, "addBookOut: 接收到的对象-->"+book.toString() );
+            if (book == null){
+                Log.e(TAG, "addBookOut: book is null in Out");
+                book = new Book();
+            }
+            //尝试修改book的参数，主要是为了观察其到客户端的反馈
+            book.setPrice(2333);
+            if (!mBooks.contains(book)){
+                mBooks.add(book);
+            }
+            Log.e(TAG, "addBookOut: now the list is "+ mBooks.toString());
+            return book;
         }
 
         @Override
-        public Book addBookInOut(Book msg) throws RemoteException {
-            return null;
+        public Book addBookInOut(Book book) throws RemoteException {
+            Log.e(TAG, "addBookInOut: 接收到的对象-->"+book.toString() );
+            if (book == null){
+                Log.e(TAG, "addBookInOut: book is null in InOut");
+                book = new Book();
+            }
+            //尝试修改book的参数，主要是为了观察其到客户端的反馈
+            book.setPrice(2333);
+            if (!mBooks.contains(book)){
+                mBooks.add(book);
+            }
+            Log.e(TAG, "addBookInOut: now the list is "+ mBooks.toString());
+            return book;
         }
     };
 
     @Override
     public void onCreate() {
+        Log.e(TAG, "onCreate: AIDLService" );
         super.onCreate();
         Book book = new Book();
         book.setName("Android 开发艺术探索");
@@ -72,6 +97,7 @@ public class AIDLService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        Log.e(TAG, "onBind: AIDLService" );
         return mBookManager;
     }
 }

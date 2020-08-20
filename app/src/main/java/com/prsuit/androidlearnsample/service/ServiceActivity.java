@@ -116,6 +116,10 @@ public class ServiceActivity extends AppCompatActivity {
         startService(intent2);//多次启动，顺序执行，全部执行完自动结束
     }
 
+    public void startAIDLActivity(View view){
+        AIDLActivity.startAct(this);
+    }
+
     @Override
     protected void onRestart() {
         Log.e(TAG, "onRestart: " + subTag);
