@@ -28,59 +28,67 @@ public class AIDLService extends Service {
     private IBookManager.Stub mBookManager = new IBookManager.Stub() {
         @Override
         public List<Book> getBooks() throws RemoteException {
-            Log.e(TAG, "getBooks: "+ mBooks.toString());
-            if (mBooks != null){
-                return mBooks;
+            synchronized (this) {
+                Log.e(TAG, "getBooks: " + mBooks.toString());
+                if (mBooks != null) {
+                    return mBooks;
+                }
+                return new ArrayList<>();
             }
-            return new ArrayList<>();
         }
 
         @Override
         public Book addBookIn(Book book) throws RemoteException {
-            Log.e(TAG, "addBookIn: 接收到的对象-->"+book.toString() );
-            if (book == null){
-                Log.e(TAG, "addBookIn: book is null in In");
-                book = new Book();
+            synchronized(this) {
+                Log.e(TAG, "addBookIn: 接收到的对象-->" + book.toString());
+                if (book == null) {
+                    Log.e(TAG, "addBookIn: book is null in In");
+                    book = new Book();
+                }
+                //尝试修改book的参数，主要是为了观察其到客户端的反馈
+                book.setPrice(2333);
+                if (!mBooks.contains(book)) {
+                    mBooks.add(book);
+                }
+                Log.e(TAG, "addBookIn: now the list is " + mBooks.toString());
+                return book;
             }
-            //尝试修改book的参数，主要是为了观察其到客户端的反馈
-            book.setPrice(2333);
-            if (!mBooks.contains(book)){
-                mBooks.add(book);
-            }
-            Log.e(TAG, "addBookIn: now the list is "+mBooks.toString() );
-            return book;
         }
 
         @Override
         public Book addBookOut(Book book) throws RemoteException {
-            Log.e(TAG, "addBookOut: 接收到的对象-->"+book.toString() );
-            if (book == null){
-                Log.e(TAG, "addBookOut: book is null in Out");
-                book = new Book();
+            synchronized(this) {
+                Log.e(TAG, "addBookOut: 接收到的对象-->" + book.toString());
+                if (book == null) {
+                    Log.e(TAG, "addBookOut: book is null in Out");
+                    book = new Book();
+                }
+                //尝试修改book的参数，主要是为了观察其到客户端的反馈
+                book.setPrice(2333);
+                if (!mBooks.contains(book)) {
+                    mBooks.add(book);
+                }
+                Log.e(TAG, "addBookOut: now the list is " + mBooks.toString());
+                return book;
             }
-            //尝试修改book的参数，主要是为了观察其到客户端的反馈
-            book.setPrice(2333);
-            if (!mBooks.contains(book)){
-                mBooks.add(book);
-            }
-            Log.e(TAG, "addBookOut: now the list is "+ mBooks.toString());
-            return book;
         }
 
         @Override
         public Book addBookInOut(Book book) throws RemoteException {
-            Log.e(TAG, "addBookInOut: 接收到的对象-->"+book.toString() );
-            if (book == null){
-                Log.e(TAG, "addBookInOut: book is null in InOut");
-                book = new Book();
+            synchronized(this) {
+                Log.e(TAG, "addBookInOut: 接收到的对象-->" + book.toString());
+                if (book == null) {
+                    Log.e(TAG, "addBookInOut: book is null in InOut");
+                    book = new Book();
+                }
+                //尝试修改book的参数，主要是为了观察其到客户端的反馈
+                book.setPrice(2333);
+                if (!mBooks.contains(book)) {
+                    mBooks.add(book);
+                }
+                Log.e(TAG, "addBookInOut: now the list is " + mBooks.toString());
+                return book;
             }
-            //尝试修改book的参数，主要是为了观察其到客户端的反馈
-            book.setPrice(2333);
-            if (!mBooks.contains(book)){
-                mBooks.add(book);
-            }
-            Log.e(TAG, "addBookInOut: now the list is "+ mBooks.toString());
-            return book;
         }
     };
 

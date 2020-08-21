@@ -8,7 +8,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.prsuit.androidlearnsample.aidl.IMyAIDLService;
+import com.prsuit.androidlearnsample.IMyAIDLService;
 
 import static com.prsuit.androidlearnsample.Constants.TAG;
 

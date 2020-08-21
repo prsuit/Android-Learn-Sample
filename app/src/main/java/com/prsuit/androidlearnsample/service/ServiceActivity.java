@@ -17,7 +17,8 @@ import android.widget.Button;
 
 import static com.prsuit.androidlearnsample.Constants.TAG;
 import com.prsuit.androidlearnsample.R;
-import com.prsuit.androidlearnsample.aidl.IMyAIDLService;
+import com.prsuit.androidlearnsample.IMyAIDLService;
+import com.prsuit.androidlearnsample.ipc.client.ClientActivity;
 
 public class ServiceActivity extends AppCompatActivity {
 
@@ -118,6 +119,7 @@ public class ServiceActivity extends AppCompatActivity {
 
     public void startAIDLActivity(View view){
         AIDLActivity.startAct(this);
+//        ClientActivity.startAct(this);
     }
 
     @Override

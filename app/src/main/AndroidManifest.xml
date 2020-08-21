@@ -17,6 +17,7 @@
         <activity android:name=".contentprovider.ContentProviderActivity" />
         <activity android:name=".broadcastreceiver.BroadcastActivity" />
         <activity android:name=".service.ServiceActivity" />
+        <activity android:name=".ipc.client.ClientActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,10 +50,18 @@
             android:name=".service.AIDLService"
             android:exported="true"
             android:process=":remote">
-
             <!-- 提供隐式调用 -->
             <intent-filter>
                 <action android:name="com.prsuit.aidl.bookmanager" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".ipc.server.RemoteService"
+            android:exported="true"
+            android:process=":remote">
+            <!-- 提供隐式调用 -->
+            <intent-filter>
+                <action android:name="com.prsuit.ipc.bookmanager" />
             </intent-filter>
         </service>
     </application>

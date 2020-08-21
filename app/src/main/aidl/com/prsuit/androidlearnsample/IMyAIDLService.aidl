@@ -1,5 +1,5 @@
 // IMyAIDLService.aidl
-package com.prsuit.androidlearnsample.aidl;
+package com.prsuit.androidlearnsample;
 
 // Declare any non-default types here with import statements
 
