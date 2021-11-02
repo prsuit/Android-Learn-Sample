@@ -10,6 +10,8 @@ import android.view.View;
 
 import com.prsuit.androidlearnsample.R;
 
+import static android.app.Activity.RESULT_OK;
+
 public class TestResultActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private MyFragmentPagerAdapter myFragmentPagerAdapter;

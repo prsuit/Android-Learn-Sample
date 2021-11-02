@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.prsuit.androidlearnsample.annotations.AutoWired;
+import com.prsuit.androidlearnsample.annotations.InjectUtils;
+import com.prsuit.androidlearnsample.annotations.InjectView;
 import com.prsuit.androidlearnsample.broadcastreceiver.BroadcastActivity;
 import com.prsuit.androidlearnsample.contentprovider.ContentProviderActivity;
 import com.prsuit.androidlearnsample.fragment.MyFragmentActivity;
@@ -17,12 +20,18 @@ import com.prsuit.androidlearnsample.service.ServiceActivity;
 import static com.prsuit.androidlearnsample.Constants.TAG;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private String  subTag = "MainActivity";
+    private String subTag = "MainActivity";
     private TextView serviceTv;
     private TextView broadcastTv;
     private TextView contentProviderTv;
     private TextView lazyFragmentTv;
     private TextView handlerTv;
+
+    @InjectView(R.id.annotation_tv)
+    private TextView annotationTv;
+
+    @AutoWired
+    String string;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         initView();
         initListener();
+        InjectUtils.injectView(this);
+        annotationTv.setText("自定义注解");
     }
 
     private void initListener() {
@@ -99,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.service_tv:
                 ServiceActivity.startAct(this);
                 break;
