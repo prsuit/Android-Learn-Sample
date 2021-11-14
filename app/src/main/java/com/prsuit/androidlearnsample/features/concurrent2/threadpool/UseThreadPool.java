@@ -73,5 +73,8 @@ public class UseThreadPool {
     		System.out.println(result.get());
     	}
     	pool.shutdown();
+
+    	// 获取设备CPU核数
+//        System.out.println("cpu-->"+Runtime.getRuntime().availableProcessors());
     }
 }
