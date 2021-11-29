@@ -64,4 +64,25 @@ public class Binary {
         }
         return index;
     }
+
+    // This is Arrays.binarySearch(), but doesn't do any argument validation.
+    static int binarySearch(int[] array, int size, int value) {
+        if (null == array || size == 0) return -1;
+        int lo = 0;
+        int hi = size - 1;
+
+        while (lo <= hi) {
+            final int mid = (lo + hi) >>> 1;//>>>无符号右移，高位补0; <<左移低位补0
+            final int midVal = array[mid];
+
+            if (midVal < value) {
+                lo = mid + 1;
+            } else if (midVal > value) {
+                hi = mid - 1;
+            } else {
+                return mid;  // value found
+            }
+        }
+        return ~lo;  // value not present
+    }
 }
