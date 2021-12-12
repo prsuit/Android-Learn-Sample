@@ -36,6 +36,21 @@ public class Sort {
         printArr(arr);
     }
 
+    //相邻两数比较，
+    private static void bubbleSort2(int[] arr) {
+        //判断边界条件
+        if (checkNull(arr)) return;
+        //第一次比较范围0～(n-1)，第二次比较0~(n-2)...
+        for (int n = arr.length - 1; n > 0; n--) {
+            //每相邻两数比较大小
+            for (int i = 0; i < n; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    swapXOR(arr, i, i + 1);
+                }
+            }
+        }
+    }
+
     //选择排序 角标互换
     //只是记录着最小值的下标，接着用最小值的下标继续和后面的数进行比较
     private static void selectionSort(int[] arr) {
@@ -44,9 +59,10 @@ public class Sort {
         for (int i = 0; i < arr.length - 1; i++) {
             minIndex = i;
             for (int j = i + 1; j < arr.length; j++) {
-                if (arr[j] < arr[minIndex]) {
-                    minIndex = j;
-                }
+//                if (arr[j] < arr[minIndex]) {
+//                    minIndex = j;
+//                }
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
             }
             if (minIndex != i) {
                 swapTemp(arr, i, minIndex);
@@ -55,20 +71,26 @@ public class Sort {
         printArr(arr);
     }
 
-    //插入排序 扑克牌往回插 与前面的值比较
+    //插入排序 扑克牌往回插 与前面的值比较,当值小于前面值交换，直到最左边或当前值不小于前面值
     private static void insertSort(int[] arr) {
         if (checkNull(arr)) return;
-        for (int i = 0; i < arr.length - 1; i++) {
-            for (int j = i + 1; j > 0; j--) {
-                if (arr[j] < arr[j - 1]) {
-                    int temp = arr[j];
-                    arr[j] = arr[j - 1];
-                    arr[j - 1] = temp;
-                } else {
-                    break;
-                }
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--) {
+                swapXOR(arr, j, j + 1);
             }
         }
+
+//        for (int i = 0; i < arr.length - 1; i++) {
+//            for (int j = i + 1; j > 0; j--) {
+//                if (arr[j] < arr[j - 1]) {
+//                    int temp = arr[j];
+//                    arr[j] = arr[j - 1];
+//                    arr[j - 1] = temp;
+//                } else {
+//                    break;
+//                }
+//            }
+//        }
         printArr(arr);
     }
 

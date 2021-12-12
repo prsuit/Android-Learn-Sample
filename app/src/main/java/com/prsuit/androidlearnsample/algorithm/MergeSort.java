@@ -1,7 +1,7 @@
 package com.prsuit.androidlearnsample.algorithm;
 
 /**
- * @Description: 归并排序
+ * @Description: 归并排序 时间复杂度O(N*logN) 空间O(N) 稳定(相同元数的相对顺序不变)
  * @Author: sh
  * @Date: 2021/11/24
  */
@@ -26,7 +26,8 @@ class MergeSort {
         if (checkNull(arr)) return;
         // 当left == right时，不需要再划分
         if (left < right) {
-            int mid = (left + right) / 2;
+//            int mid = (left + right) / 2;
+            int mid = left + ((right - left) >> 1);
             // 左右往下拆分
             mergeSort(arr, temp, left, mid);//左半部分排好序
             mergeSort(arr, temp, mid + 1, right);//右半部分排好序
@@ -37,6 +38,7 @@ class MergeSort {
 
     //合并两个有序子序列
     private static void mergeSortedArray(int[] arr, int[] temp, int left, int mid, int right) {
+//        int temp[ right - left + 1] 定义临时存放数组
         int i = left;
         int j = mid + 1;
         int k = 0;
